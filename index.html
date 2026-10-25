@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter for Abi</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #30231d;
+  --paper: #eee3d2;
+  --ink: #38271e;
+  --brown: #755740;
+  --muted: #9c826b;
+  --line: #cbbb a5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 26px 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen.active {
+  display: flex;
+  animation: fade .5s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.layout {
+  width: min(100%, 650px);
+}
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #c7ad94;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 2px;
+  border-bottom: 1px solid #725642;
+}
+
+.paper {
+  background: var(--paper);
+  padding: clamp(25px, 6vw, 55px);
+  margin-top: 14px;
+  border: 1px solid #f8efe2;
+  box-shadow: 0 20px 60px #00000020;
+  position: relative;
+}
+
+h1, h2, .script {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(55px, 12vw, 82px);
+  line-height: .95;
+}
+
+h2 {
+  font-size: clamp(38px, 8vw, 53px);
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.italic {
+  font-style: italic;
+  color: var(--brown);
+}
+
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+p {
+  font-size: 13px;
+  line-height: 2;
+  margin-bottom: 17px;
+  overflow-wrap: anywhere;
+}
+
+.center { text-align: center; }
+
+.rule {
+  width: 40px;
+  height: 1px;
+  background: var(--brown);
+  margin: 25px 0;
+}
+
+.center .rule {
+  margin: 25px auto;
+}
+
+.date {
+  display: inline-block;
+  border: 1px solid #c7b29b;
+  padding: 10px 15px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin: 22px 0;
+}
+
+.page-number {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.note {
+  border-left: 1px solid #b59b80;
+  padding-left: 17px;
+  margin: 22px 0;
+}
+
+.quote {
+  background: #e2d3bf;
+  padding: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  line-height: 1.5;
+  font-style: italic;
+  margin: 25px 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.center .actions {
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.next {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 13px 20px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.next:hover {
+  background: #6c4d37;
+}
+
+.back {
+  background: transparent;
+  color: var(--brown);
+  border: 1px solid #c7b29b;
+  padding: 12px 17px;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.signature {
+  text-align: right;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 32px;
+}
+
+.footer {
+  text-align: center;
+  color: #b39a82;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 17px;
+}
+
+.cover {
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cover::after {
+  content: "✳";
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  color: #b69b7c;
+  font-size: 20px;
+}
+
+.cover-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 45px;
+  color: #c4a88c;
+}
+
+.cover h1 {
+  color: #f2e6d5;
+  font-size: clamp(65px, 12vw, 94px);
+}
+
+.cover h2 {
+  color: #d0b49a;
+}
+
+.cover p {
+  color: #e0cdb8;
+}
+
+.cover .next {
+  background: transparent;
+  color: #ead8c4;
+  border-color: #9b795b;
+}
+
+@media(max-width:480px) {
+  .paper { padding: 25px 21px; }
+  p { font-size: 12px; }
+  .cover { min-height: 440px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HALAMAN 1: PEMBUKA -->
+<section class="screen active" id="s1">
+ <div class="layout">
+  <div class="topline">
+   <span>A letter for you</span>
+   <span>01 / 09</span>
+  </div>
+
+  <div class="paper cover center" style="background:#49352a">
+   <p class="eyebrow">A personal letter</p>
+   <h1>Hi, Abi!</h1>
+   <h2 class="italic">This is for you.</h2>
+   <div class="rule" style="background:#b49a7c;margin:25px auto"></div>
+   <p>Ada sesuatu yang ingin<br>Manda sampaikan untukmu...</p>
+
+   <div class="actions" style="justify-content:center">
+    <button class="next" onclick="go(2)">
+     OPEN THIS LETTER &nbsp; →
+    </button>
+   </div>
+
+   <p class="cover-label">With love, Manda</p>
+  </div>
+  <div class="footer">A LITTLE THOUGHT, WRITTEN WITH CARE</div>
+ </div>
+</section>
+
+<!-- HALAMAN 2: CERITA -->
+<section class="screen" id="s2">
+ <div class="layout">
+  <div class="topline"><span>Chapter 01</span><span>02 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">01 / A LITTLE STORY</p>
+   <p class="eyebrow">For Muhammad Abigail Galih Al Fathiin</p>
+   <h2>Hai, Abi.</h2>
+
+   <p>Hai fe Muhammad Abigail galih Al fathiin,,, gmn kabar nya? Semoga baik2 aja yahhh… Ingett ngk sih pertama kali kita call tgl 25 Agustus,,, dan Yap sekarang tgl 25 Oktober,,, ternyata udh dua bulan yaaakkk kita call, saling kenal, tuker cerita (gk juga sih sebelumnya juga kita sering cerita tapi kan chat gk call😗)</p>
+
+   <p>senang bisa ngenal Abi lebih jauh.,,senang juga bisa disyg sama Abi,,,,senang bisa dongengin Abi,,, senang bisa nyanyiin buat Abi,,,, ya walau kadang berantem mulu kerjaan nya ampe Manda gk mood Ppdl,, kangen rasanya dengerin Abi cerita 😌</p>
+
+   <div class="actions">
+    <button class="back" onclick="go(1)">← PREVIOUS</button>
+    <button class="next" onclick="go(3)">CONTINUE →</button>
+   </div>
+  </div>
+  <div class="footer">SOME STORIES ARE WORTH KEEPING</div>
+ </div>
+</section>
+
+<!-- HALAMAN 3: TERIMA KASIH -->
+<section class="screen" id="s3">
+ <div class="layout">
+  <div class="topline"><span>Chapter 02</span><span>03 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">02 / WORDS OF GRATITUDE</p>
+   <p class="eyebrow">Thank you</p>
+   <h2>Terima kasih...</h2>
+
+   <p>people come and teach, makasih udah syg sama Manda, makasih udah ngajarin Manda banyak hal yg belum Manda tau, makasih udh pernah hadir dihidup manda, makasih cerita nya sedih maupun senang nya, makasih udah buat Manda senyum ketawa bahagia….</p>
+
+   <p>Makasih ya ya biii 🥺….</p>
+
+   <div class="quote">
+    Some people leave beautiful lessons, even in the smallest moments.
+   </div>
+
+   <div class="actions">
+    <button class="back" onclick="go(2)">← PREVIOUS</button>
+    <button class="next" onclick="go(4)">CONTINUE →</button>
+   </div>
+  </div>
+  <div class="footer">A NOTE OF GRATITUDE</div>
+ </div>
+</section>
+
+<!-- HALAMAN 4: MAAF -->
+<section class="screen" id="s4">
+ <div class="layout">
+  <div class="topline"><span>Chapter 03</span><span>04 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">03 / FROM MY HEART</p>
+   <p class="eyebrow">A little apology</p>
+   <h2>Maaf ya, Bi...</h2>
+
+   <div class="note">
+    <p>Maaf kalau Manda belum bisa jadi apa yg Abi inginkan, maaf kalau Manda suka rewel ganggu Abi, maaf Manda suka marah2, maaf Manda suka ngambek, maaf Manda suka haus perhatian Abi, maaf Manda Slalu minta waktu Abi terus, maaf Manda suka spam chat Abi, maaf Manda suka ovt ttg Abi, maaf suka buat drama, maaf Manda nya egois….</p>
+
+    <p>Manda syg ama Abi….</p>
+   </div>
+
+   <div class="quote">I'm still learning, too.</div>
+
+   <div class="actions">
+    <button class="back" onclick="go(3)">← PREVIOUS</button>
+    <button class="next" onclick="go(5)">CONTINUE →</button>
+   </div>
+  </div>
+  <div class="footer">GROWING THROUGH EVERY SEASON</div>
+ </div>
+</section>
+
+<!-- HALAMAN 5: NASIHAT -->
+<section class="screen" id="s5">
+ <div class="layout">
+  <div class="topline"><span>Chapter 04</span><span>05 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">04 / A GENTLE REMINDER</p>
+   <p class="eyebrow">Take your time</p>
+   <h2>Abi,</h2>
+
+   <p>Abi sehat2 yaaa bi,,, terus semangat,,, ttp jadi Abi yg Manda kenal,,, kalau Abi capek Abi pergi ke Allah,, kalau Abi butuh istirahat waktu untuk tenang datang ke Allah ya bi… jangan lupa buat love your self biii,,,</p>
+
+   <p>gk semua harus langsung jadi sesuatu yg kita ingin kan… tapi nikmati proses nya nikmati alurnya oceee… belajar dari masa lalu,,, bukan berarti gak bisa jadi lbh baik, semua org punya fase jatuh, punya masa dirinya gk baik baik aja, pernah salah, hilang arah, dan mungkin mengecewakan banyak hal,, but dari situ kita belajar buat jadi lbh baik tanpa org2 tau..</p>
+
+   <p>karna pada akhirnya masa lalu hanya sebuah bagian dari perjalanan bukan penentu dimasa depan… berdamai lah dengan diri, maafkanlah diri, maafkanlah org yg mengganggu mental, pilih dah pulihkan…</p>
+
+   <div class="actions">
+    <button class="back" onclick="go(4)">← PREVIOUS</button>
+    <button class="next" onclick="go(6)">CONTINUE →</button>
+   </div>
+  </div>
+  <div class="footer">THERE IS NO RUSH TO BECOME</div>
+ </div>
+</section>
+
+<!-- HALAMAN 6: MEMAHAMI -->
+<section class="screen" id="s6">
+ <div class="layout">
+  <div class="topline"><span>Chapter 05</span><span>06 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">05 / PLEASE REMEMBER</p>
+   <p class="eyebrow">You matter</p>
+   <h2>You are<br><span class="italic">worth so much.</span></h2>
+
+   <p>Maaf ya bi kalau semisal Manda gk bisa Nemenin Abi, Nemenin proses Abi, jadi tempat plg buat Abi ketika dunia gk baik2 aja…. Jadi rumah buat Abi… mungkin Manda gagal buat mahamin Abi, maaf udah buat Abi kecewa..</p>
+
+   <div class="quote">
+    “Kamu lbh berharga dari semuanya. WHY? Karna cuma kamu yg tau rasanya dan perasaan kamu yg ngerti, dan kamu bisa ngelakuin nya blm tentu org2 bisa”
+   </div>
+
+   <p>yakan,,,,</p>
+
+   <div class="actions">
+    <button class="back" onclick="go(5)">← PREVIOUS</button>
+    <button class="next" onclick="go(7)">CONTINUE →</button>
+   </div>
+  </div>
+  <div class="footer">BE GENTLE WITH YOURSELF</div>
+ </div>
+</section>
+
+<!-- HALAMAN 7: PENYEMANGAT -->
+<section class="screen" id="s7">
+ <div class="layout">
+  <div class="topline"><span>Chapter 06</span><span>07 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">06 / FOR YOUR TOMORROW</p>
+   <p class="eyebrow">A little encouragement</p>
+   <h2>I'm proud<br><span class="italic">of you.</span></h2>
+
+   <p>Say thanks for your self cause u doing great 🥳😊, sooo proud of u 👍🏻👏🏻… have a great day tomorrow 🤲🏻.</p>
+
+   <p>Blh kecewa dngn keadaan, blh marah, asal jangan kecewa sama diri sendiri ya… ambil positifnya, jangan lupa istirahat karna udh berbuat yg terbaik dihari ini… msh ada bsk untuk mencoba lagi ☺️</p>
+
+   <p>Dont give up Go step once the part u want.</p>
+
+   <div class="rule"></div>
+   <p class="italic">One step at a time. There is always another tomorrow.</p>
+
+   <div class="actions">
+    <button class="back" onclick="go(6)">← PREVIOUS</button>
+    <button class="next" onclick="go(8)">CONTINUE →</button>
+   </div>
+  </div>
+  <div class="footer">KEEP GOING, AT YOUR OWN PACE</div>
+ </div>
+</section>
+
+<!-- HALAMAN 8: SURAT TERAKHIR -->
+<section class="screen" id="s8">
+ <div class="layout">
+  <div class="topline"><span>Chapter 07</span><span>08 / 09</span></div>
+  <div class="paper">
+   <p class="page-number">07 / ONE LAST THING</p>
+   <p class="eyebrow">A message for you</p>
+   <h2>For you,<br><span class="italic">Abi.</span></h2>
+
+   <p>Manda mungkin belum selalu bisa memahami Abi dengan baik. Manda juga masih belajar menjadi seseorang yang lebih sabar, lebih mengerti, dan lebih baik.</p>
+
+   <p>Tapi satu hal yang Manda harapkan, semoga Abi selalu punya alasan untuk tetap melangkah, selalu ingat Allah ketika lelah, dan selalu memberi kesempatan kepada diri sendiri untuk mencoba lagi.</p>
+
+   <p>Semoga hal-hal baik selalu menemukan jalan menuju Abi.</p>
+
+   <div class="actions">
+    <button class="back" onclick="go(7)">← PREVIOUS</button>
+    <button class="next" onclick="go(9)">THE LAST PAGE →</button>
+   </div>
+  </div>
+  <div class="footer">A QUIET WISH, FROM THE HEART</div>
+ </div>
+</section>
+
+<!-- HALAMAN 9: PENUTUP -->
+<section class="screen" id="s9">
+ <div class="layout">
+  <div class="topline"><span>A letter for you</span><span>09 / 09</span></div>
+  <div class="paper center">
+   <p class="eyebrow">Before you leave</p>
+   <h1 style="font-size:clamp(55px,12vw,80px)">Thank you,</h1>
+   <h2 class="italic">Abi.</h2>
+   <div class="rule"></div>
+
+   <p>Semoga Allah selalu menjaga Abi, menenangkan hati Abi, memudahkan setiap langkah Abi, dan mempertemukan Abi dengan banyak hal baik dalam hidup.</p>
+
+   <p>Terus bertumbuh, terus belajar, dan jangan lupa bahagia.</p>
+
+   <div class="date">WITH LOVE, FROM MANDA</div>
+   <p class="signature">Manda.</p>
+
+   <div class="actions">
+    <button class="back" onclick="go(8)">← PREVIOUS</button>
+    <button class="next" onclick="go(1)">READ AGAIN ↗</button>
+   </div>
+  </div>
+  <div class="footer">A LETTER TO KEEP, A MEMORY TO TREASURE</div>
+ </div>
+</section>
+
+<script>
+function go(n) {
+  document.querySelectorAll('.screen').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById('s' + n).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
